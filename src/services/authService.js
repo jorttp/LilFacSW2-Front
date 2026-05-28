@@ -3,7 +3,7 @@ import axios from "axios";
 const KEYCLOAK_URL    = process.env.REACT_APP_KEYCLOAK_URL || "http://localhost:8090";
 const REALM           = process.env.REACT_APP_KEYCLOAK_REALM         || "lilfac";
 const CLIENT_ID       = process.env.REACT_APP_KEYCLOAK_CLIENT_ID     || "lilfac-api";
-const CLIENT_SECRET   = process.env.REACT_APP_KEYCLOAK_CLIENT_SECRET || "";
+const CLIENT_SECRET   = process.env.REACT_APP_KEYCLOAK_CLIENT_SECRET || "psaUCh3pn7HUolNFcO4R1JknvLZLud77";
 
 const TOKEN_URL = `${KEYCLOAK_URL}/realms/${REALM}/protocol/openid-connect/token`;
 
