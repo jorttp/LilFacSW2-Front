@@ -1,0 +1,38 @@
+name: CI/CD LilFac Frontend
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ci:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Build
+        env:
+          REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
+          REACT_APP_KEYCLOAK_URL: ${{ secrets.REACT_APP_KEYCLOAK_URL }}
+          REACT_APP_KEYCLOAK_REALM: ${{ secrets.REACT_APP_KEYCLOAK_REALM }}
+          REACT_APP_KEYCLOAK_CLIENT_ID: ${{ secrets.REACT_APP_KEYCLOAK_CLIENT_ID }}
+          REACT_APP_KEYCLOAK_CLIENT_SECRET: ${{ secrets.REACT_APP_KEYCLOAK_CLIENT_SECRET }}
+          REACT_APP_CF_TURNSTILE_SITE_KEY: ${{ secrets.REACT_APP_CF_TURNSTILE_SITE_KEY }}
+        run: npm run build --if-present
+
+      - name: Test
+        run: npm test -- --watchAll=false --passWithNoTests

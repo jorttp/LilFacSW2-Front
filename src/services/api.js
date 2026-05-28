@@ -3,7 +3,7 @@ import { toWorkerDto, fromWorkerDto, paginateWorkers } from "./workerMapper";
 import { normalizePhone } from "../utils/phone";
 
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:8081/api/v1",
+    baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/api/v1",
     timeout: 15000,
     headers: { "Content-Type": "application/json" },
 });
